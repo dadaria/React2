@@ -32,8 +32,14 @@ module.exports = {
 
                 }
             },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader',
+            },
         ],
     },
+
+
     resolve: {
         modules: [`${__dirname}/static_src`, 'node_modules'],
         extensions: ['.js', '.jsx'],
