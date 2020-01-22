@@ -1,6 +1,6 @@
 import update from 'react-addons-update';
 import { SEND_MESSAGE } from '../actions/messageActions';
-import { ADD_CHAT } from "../actions/chatActions";
+import { ADD_CHAT, HIGHLIGHT_CHAT, UNHIGHLIGHT_CHAT } from "../actions/chatActions";
 
 const initialStore = {
    chats: {
@@ -8,13 +8,13 @@ const initialStore = {
        2: {title: 'Чат 2', messageList: []},
        3: {title: 'Чат 3', messageList: []},
    },
+   chatsWithNewMessages: [1, 2],
 };
 
 
 export default function chatReducer(store = initialStore, action) {
    switch (action.type) {
        case SEND_MESSAGE: {
-           console.log(action);
            return update(store, {
                chats: { $merge: { [action.chatId]: {
                    title: store.chats[action.chatId].title,
@@ -28,6 +28,7 @@ export default function chatReducer(store = initialStore, action) {
                chats: { $merge: { [chatId]: { title: action.title, messageList: [] } } }
            });
        }
+    //    case HIGHLIGHT_CHAT: 
        default:
            return store;
    }
